@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+@import "tailwindcss";
+@import "./variables.css";
+@import "./animations.css";
+
+@layer base {
+  * {
+    border-color: var(--color-orbit-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-orbit-ink);
+    background-color: var(--color-orbit-base);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-orbit-green-500);
+    outline-offset: 2px;
+    border-radius: var(--radius-orbit-sm);
+  }
+}
+
+@layer utilities {
+  .font-mono-stat {
+    font-family: var(--font-mono);
+    font-feature-settings: "tnum" 1;
+  }
+
+  .container-orbit {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-orbit {
+      padding-inline: 2rem;
+    }
+  }
+}

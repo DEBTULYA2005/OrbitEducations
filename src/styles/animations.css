@@ -1,0 +1,43 @@
+/* ==========================================================================
+   Orbit Educations — Motion
+   ========================================================================== */
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes orbit-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes orbit-pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.35); }
+  100% { box-shadow: 0 0 0 12px rgba(22, 163, 74, 0); }
+}
+
+.animate-orbit-fade-up {
+  animation: orbit-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-orbit-spin-slow {
+  animation: orbit-spin 26s linear infinite;
+}
+
+.animate-orbit-spin-slow-reverse {
+  animation: orbit-spin-reverse 34s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-orbit-fade-up,
+  .animate-orbit-spin-slow,
+  .animate-orbit-spin-slow-reverse {
+    animation: none !important;
+  }
+}
