@@ -10,20 +10,28 @@ export const GALLERY_SECTIONS = [
     items: [
       {
         id: 'alum-1',
-        image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80',
-        title: 'Batch of 2022, Advanced Track',
+        image: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmX6Q56e9PKpxryO5Y_tEQ0ap-0SvEm-A1gfie_veDMjowyz4-ahf8o410sb4KD6Ezp41zDuTl6Uq1dH-QkVmkEISkof3EKsuWgkuWawYzhZpNGTgwo0caPt6Cuq8GI-rSNNjxlqQ=s680-w680-h510-rw',
+        title: 'Batch of 2021, Advanced Track',
         description:
-          'Twenty-two students from our first Advanced-tier cohort went on to UG programs across the state, three on merit scholarships.',
+          'Eight students from our first Advanced-tier cohort went on to UG programs across the state, three on merit scholarships.',
       },
       {
         id: 'alum-2',
-        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80',
-        title: 'Reunion, Asansol Center',
+        image: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWn37o6X2BhZF_Uy-g5HI-Mh7D662ZZBemzQ0RXhBibsvZmnJk0sXUiRi71ZxjvCMW8OxjNRSAaHFUnJAhds55CVET58BtEglFkHgfxOJlDTMde9dhv6VqHR5GfnXr5ZAj8n1lg8=s680-w680-h510-rw',
+        title: 'Batch of 2024, Advanced Track',
+        description:
+          'Nine students from our first Advanced-tier cohort went on to UG programs across the state, three on merit scholarships.',
+      },
+      {
+        id: 'alum-3',
+        image: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmyW9hLAlNa9tacM_dMTGl67ou6Pw1CgK2UdTnh86XJoB2uHCVrNzJTVrNCmHM7HHfvIfD59HoFxB2TJ_JMPPIbG_InXrd_mWGWy58QPHtV-x_C1YKWkTCN-MNHlV-OcX1Q-W0=s680-w680-h510-rw',
+        title: 'Reunion, Durgapur Center',
         description:
           'Alumni returned to mentor current students on exam strategy and share what changed once they left Orbit.',
       },
     ],
   },
+  
   {
     id: 'picnics',
     label: 'Picnics',
@@ -31,8 +39,14 @@ export const GALLERY_SECTIONS = [
     items: [
       {
         id: 'picnic-1',
-        image: 'https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=800&q=80',
-        title: 'Winter picnic, Durgapur batch',
+        image: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl7EFuW9hgai4dLlbqZd95y1g5VBUYZY7zOLysiuXXQizjr5kOVqUN3reBgftfsYPAOr9iQhWNdYbtSUka1-CpacoJnyg0a2nobcvx56Kv-z2CAf69qMEJ7ig3L4dvj9iNMqimU_w=s680-w680-h510-rw',
+        title: 'Summer picnic, Mandarmani batch',
+        description: 'A day off the syllabus at the riverside grounds, before the certification sprint began.',
+      },
+      {
+        id: 'picnic-2',
+        image: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkxzUc6Rut8OGw6-VIXZIXmmIULysmyQvJtK831OBp0ztewGOlKtV2uXbr_RRxKKh6wf4yzWTp769Ij3XBWZSoq-fI5a58LAEPxhd4gbMFFUPpT2Zu3SzkExcsxfoulV4oUAyw=s680-w680-h510-rw',
+        title: 'Winter picnic, HuchukDanga Park',
         description: 'A day off the syllabus at the riverside grounds, before the certification sprint began.',
       },
     ],
