@@ -8,13 +8,13 @@ export const AWARD_SECTIONS = [
     items: [
       {
         id: 'perf-school-1',
-        image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80',
+        image: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlGXTx9-3jtRtoilc_Mkk0nW5a-AAp3nfXJazdBdusKWjOtZXGjBVF9knG3mqAWBgImbp1Om4Z0EvEE_cFh7vBJCss2gCh9_YQ8-YcNkxwRhnuqs_XbBddInm9Q5Hk9kmtVWBBk=s680-w680-h510-rw',
         name: 'Anwesha Roy',
         detail: 'State rank 4 — Class 12 Board Examination, 2025',
       },
       {
         id: 'perf-school-2',
-        image: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&q=80',
+        image: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmut68N-PkJIh3tWLkkYOK_za8q9AkQrbVHlYh4PP3G4VJFO0YqlE16PumgwAQzHn27wPXYZJsVX0ianAUpgfwrwHfEcFq7T5U55Wno68e3g9l22hZlHQsEQZ0SW4DmYFb7NjH6=s680-w680-h510-rw',
         name: 'Rohan Ghosh',
         detail: 'District topper — Class 10 Board Examination, 2025',
       },
