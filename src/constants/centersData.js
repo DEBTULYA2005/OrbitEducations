@@ -5,7 +5,7 @@ export const CENTERS = [
     address: 'Rabindra Pally, Durgapur, West Bengal, India',
     phone: '+91 98511 91870',
     email: 'durgapur.orbit@gmail.com', 
-    image: 'https://images.unsplash.com/photo-1519452575417-564c1401ecc0?w=800&q=80',
+    image: 'https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmGCFglkw93fs5MD4C6MLnqtr9A1J43qriKNlGx66X6RbC5pQVb-mOhQOFbEKRZegjobR26uXAI_FuPvSrSXDho_oOyqKB-aALEr_J3ky6hBOzJyTMEfwmCWG91sVKgGEpalAUYYWQ6T_w=s680-w680-h510-rw',
     mapEmbedUrl:
       'https://www.google.com/maps?q=Durgapur,West+Bengal,India&output=embed',
   },
