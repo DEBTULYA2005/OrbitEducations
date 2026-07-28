@@ -1,4 +1,5 @@
-import { useState } from 'react'
+// import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
 import { COURSE_CATEGORIES } from '@/constants/courseCategories'
@@ -19,6 +20,10 @@ const INITIAL_FORM = {
   enrolledCourse: '',
 }
 
+const [form, setForm] = useState(INITIAL_FORM)
+
+
+
 export default function SignupForm({ onSuccess }) {
   const { signup, isSigningUp, signupError } = useAuth()
   const navigate = useNavigate()
@@ -27,6 +32,17 @@ export default function SignupForm({ onSuccess }) {
   function handleChange(e) {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
   }
+
+  function generateUID() {
+  return `ORB${Date.now().toString().slice(-8)}`
+  }
+
+  useEffect(() => {
+    setForm((f) => ({
+      ...f,
+      uid: generateUID(),
+    }))
+  }, [])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -42,7 +58,7 @@ export default function SignupForm({ onSuccess }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Input id="su-uid" name="uid" label="Choose a UID" value={form.uid} onChange={handleChange} required />
+        <Input id="su-uid" name="uid" label="Student UID" value={form.uid} readOnly required />
         <Input id="su-name" name="name" label="Full name" value={form.name} onChange={handleChange} required />
         <Input id="su-email" name="email" type="email" label="Email" value={form.email} onChange={handleChange} required />
         <Input id="su-phone" name="phone" type="tel" label="Phone" value={form.phone} onChange={handleChange} required />
