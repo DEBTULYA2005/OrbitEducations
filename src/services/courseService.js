@@ -18,4 +18,9 @@ export const courseService = {
     const { data } = await axiosInstance.post('/courses/applications/', payload)
     return data
   },
+
+  async getMyApplications() {
+    const { data } = await axiosInstance.get('/courses/applications/my/')
+    return data
+  },
 }
