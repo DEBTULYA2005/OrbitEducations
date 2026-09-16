@@ -25,14 +25,14 @@ export default function DashboardOverviewPage() {
   })
 
   const {
-    data: applications = [],
+    data: applications,
     isLoading: isLoadingApplications,
   } = useQuery({
     queryKey: ['course-applications', 'me'],
     queryFn: courseService.getMyApplications,
   })
 
-  const enrolledCourse = applications[0]?.courseTitle
+  const enrolledCourse = applications?.results?.[0]?.courseTitle
 
 
   return (
