@@ -1,20 +1,47 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { courseService } from '@/services/courseService'
 import { COURSE_CATEGORIES } from '@/constants/courseCategories'
+import { useAuth } from '@/context/AuthContext'
 import Input from '@/components/common/Input'
 import Select from '@/components/common/Select'
 import Button from '@/components/common/Button'
 import ErrorMessage from '@/components/common/ErrorMessage'
 
-const INITIAL_FORM = { name: '', phone: '', email: '', courseId: '', message: '' }
-
 export default function EnrollmentForm() {
-  const [form, setForm] = useState(INITIAL_FORM)
+  const { user, isAuthenticated } = useAuth()
+
+  // Anonymous visitor: no form at all — just a prompt to log in.
+  if (!isAuthenticated) {
+    return (
+      <div className="rounded-2xl border border-orbit-line bg-orbit-blue-50/40 p-6 text-center">
+        <p className="font-display text-lg font-semibold text-orbit-ink">Log in to apply</p>
+        <p className="mt-1 text-sm text-orbit-ink-soft">
+          Applications are linked to your student account so our team can follow up directly.
+        </p>
+        <Link to="/login">
+          <Button className="mt-4">Log in</Button>
+        </Link>
+      </div>
+    )
+  }
+
+  // Logged in: only their enrolled category is selectable.
+  const allowedCategory = COURSE_CATEGORIES.find((c) => c.id === user.enrolledCourseCategory)
+
+  const initialForm = { courseId: allowedCategory?.id || '', message: '' }
+  const [form, setForm] = useState(initialForm)
 
   const mutation = useMutation({
-    mutationFn: courseService.applyToCourse,
-    onSuccess: () => setForm(INITIAL_FORM),
+    mutationFn: (payload) =>
+      courseService.applyToCourse({
+        ...payload,
+        name: user.name,
+        phone: user.phone,
+        email: user.email,
+      }),
+    onSuccess: () => setForm(initialForm),
   })
 
   function handleChange(e) {
@@ -41,21 +68,24 @@ export default function EnrollmentForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      <Input id="ef-name" name="name" label="Full name" value={form.name} onChange={handleChange} required />
-      <Input id="ef-phone" name="phone" type="tel" label="Phone" value={form.phone} onChange={handleChange} required />
-      <Input id="ef-email" name="email" type="email" label="Email" value={form.email} onChange={handleChange} required className="sm:col-span-2" />
-      <Select id="ef-course" name="courseId" label="Course of interest" value={form.courseId} onChange={handleChange} required className="sm:col-span-2">
-        <option value="" disabled>
-          Select a category
-        </option>
-        {COURSE_CATEGORIES.map((c) => (
-          <option key={c.id} value={c.id}>
-            {c.label}
-          </option>
-        ))}
-      </Select>
-      <div className="flex flex-col gap-1.5 sm:col-span-2">
+    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
+      <div className="rounded-lg border border-orbit-line bg-orbit-blue-50/40 px-3.5 py-2.5 text-sm text-orbit-ink-soft">
+        Applying as <span className="font-semibold text-orbit-ink">{user.name}</span> ({user.email})
+      </div>
+
+      {allowedCategory ? (
+        <div className="rounded-lg border border-orbit-line bg-white px-3.5 py-2.5 text-sm text-orbit-ink-soft">
+          Course track: <span className="font-semibold text-orbit-ink">{allowedCategory.label}</span>
+        </div>
+      ) : (
+        <ErrorMessage>
+          You don't have a course track set on your account yet — contact admissions to update it.
+        </ErrorMessage>
+      )}
+
+      <input type="hidden" name="courseId" value={form.courseId} />
+
+      <div className="flex flex-col gap-1.5">
         <label htmlFor="ef-message" className="text-sm font-medium text-orbit-ink-soft">
           Anything we should know? (optional)
         </label>
@@ -69,13 +99,9 @@ export default function EnrollmentForm() {
         />
       </div>
 
-      {mutation.isError && (
-        <ErrorMessage className="sm:col-span-2">
-          Something went wrong submitting your application. Please try again.
-        </ErrorMessage>
-      )}
+      {mutation.isError && <ErrorMessage>Something went wrong submitting your application. Please try again.</ErrorMessage>}
 
-      <Button type="submit" isLoading={mutation.isPending} className="sm:col-span-2">
+      <Button type="submit" isLoading={mutation.isPending} disabled={!allowedCategory}>
         Submit application
       </Button>
     </form>
