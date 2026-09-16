@@ -16,18 +16,19 @@ const axiosInstance = axios.create({
   },
 })
 
-// Attach CSRF token for Django's cookie-based CSRF protection (needed
-// alongside httpOnly auth cookies for POST/PUT/PATCH/DELETE).
-function getCsrfToken() {
-  const match = document.cookie.match(/csrftoken=([^;]+)/)
-  return match ? match[1] : null
+// Module-level variable — holds the CSRF token in memory, set explicitly
+// from the server's JSON response (not read from document.cookie, since
+// cross-domain cookies aren't visible to frontend JS at all).
+let csrfToken = null
+
+export function setCsrfToken(token) {
+  csrfToken = token
 }
 
 axiosInstance.interceptors.request.use((config) => {
-  const csrfToken = getCsrfToken()
   if (csrfToken && ['post', 'put', 'patch', 'delete'].includes(config.method)) {
     config.headers['X-CSRFToken'] = csrfToken
-  }
+  } 
   return config
 })
 

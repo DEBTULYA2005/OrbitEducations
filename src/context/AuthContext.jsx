@@ -1,6 +1,8 @@
 import { createContext, useContext, useMemo } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { authService } from '@/services/authService'
+import { setCsrfToken } from '@/services/axiosInstance'
+import { useEffect } from 'react'
 
 const AuthContext = createContext(null)
 
@@ -8,8 +10,8 @@ export function AuthProvider({ children }) {
   const queryClient = useQueryClient()
 
   const {
-    data: user,
-    isLoading: isLoadingUser,
+  data: user,
+  isLoading: isLoadingUser,
   } = useQuery({
     queryKey: ['auth', 'me'],
     queryFn: authService.getCurrentUser,
@@ -18,14 +20,26 @@ export function AuthProvider({ children }) {
     throwOnError: false,
   })
 
+  // Whenever /me/ resolves with a fresh csrfToken, store it for axiosInstance
+  // to attach on the next mutating request (POST/PUT/PATCH/DELETE).
+  useEffect(() => {
+    if (user?.csrfToken) setCsrfToken(user.csrfToken)
+  }, [user])
+
   const loginMutation = useMutation({
     mutationFn: authService.login,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['auth', 'me'] }),
+    onSuccess: (data) => {
+      if (data?.csrfToken) setCsrfToken(data.csrfToken)
+      queryClient.invalidateQueries({ queryKey: ['auth', 'me'] })
+    },
   })
 
   const signupMutation = useMutation({
     mutationFn: authService.signup,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['auth', 'me'] }),
+    onSuccess: (data) => {
+      if (data?.csrfToken) setCsrfToken(data.csrfToken)
+      queryClient.invalidateQueries({ queryKey: ['auth', 'me'] })
+    },
   })
 
   const logoutMutation = useMutation({

@@ -20,29 +20,25 @@ const INITIAL_FORM = {
   enrolledCourse: '',
 }
 
-const [form, setForm] = useState(INITIAL_FORM)
-
-
-
 export default function SignupForm({ onSuccess }) {
   const { signup, isSigningUp, signupError } = useAuth()
   const navigate = useNavigate()
   const [form, setForm] = useState(INITIAL_FORM)
 
-  function handleChange(e) {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
-  }
-
   function generateUID() {
-  return `ORB${Date.now().toString().slice(-8)}`
+    return `ORB${Date.now().toString().slice(-8)}${Math.floor(Math.random() * 100)}`
   }
-
+  
   useEffect(() => {
     setForm((f) => ({
       ...f,
       uid: generateUID(),
     }))
   }, [])
+
+  function handleChange(e) {
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
+  }
 
   async function handleSubmit(e) {
     e.preventDefault()
