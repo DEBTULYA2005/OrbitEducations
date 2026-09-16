@@ -72,7 +72,7 @@ export default function CourseDetailPage() {
           <p className="mt-1 mb-5 text-sm text-orbit-ink-soft">
             Submit your details and our admissions team will follow up.
           </p>
-          <EnrollmentForm />
+          <EnrollmentForm course={course} />
         </Card>
       </div>
     </section>

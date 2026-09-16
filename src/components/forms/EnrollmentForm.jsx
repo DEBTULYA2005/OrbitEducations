@@ -9,7 +9,7 @@ import Select from '@/components/common/Select'
 import Button from '@/components/common/Button'
 import ErrorMessage from '@/components/common/ErrorMessage'
 
-export default function EnrollmentForm() {
+export default function EnrollmentForm({ course }) {
   const { user, isAuthenticated } = useAuth()
 
   // Anonymous visitor: no form at all — just a prompt to log in.
@@ -30,7 +30,7 @@ export default function EnrollmentForm() {
   // Logged in: only their enrolled category is selectable.
   const allowedCategory = COURSE_CATEGORIES.find((c) => c.id === user.enrolledCourseCategory)
 
-  const initialForm = { courseId: allowedCategory?.id || '', message: '' }
+  const initialForm = { courseId: course?.id || '', message: '' }
   const [form, setForm] = useState(initialForm)
 
   const mutation = useMutation({
