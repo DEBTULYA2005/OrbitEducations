@@ -91,14 +91,20 @@
 //     </Card>
 //   )
 // }
+
+
 import { useState, useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+
 import { dashboardService } from '@/services/dashboardService'
+import { courseService } from '@/services/courseService'
+
 import Card from '@/components/common/Card'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
 import ErrorMessage from '@/components/common/ErrorMessage'
 import Spinner from '@/components/common/Spinner'
+
 
 const FIELDS = [
   { name: 'name', label: 'Full name' },
@@ -108,6 +114,7 @@ const FIELDS = [
   { name: 'parentName', label: "Parent's name" },
   { name: 'parentPhone', label: "Parent's phone", type: 'tel' },
 ]
+
 
 function DetailRow({ label, value }) {
   return (
@@ -123,16 +130,56 @@ function DetailRow({ label, value }) {
   )
 }
 
+
 export default function DashboardProfilePage() {
+
   const queryClient = useQueryClient()
 
-  const { data: profile, isLoading } = useQuery({
+
+  // ==========================================
+  // PROFILE DATA
+  // ==========================================
+
+  const {
+    data: profile,
+    isLoading: isLoadingProfile,
+  } = useQuery({
     queryKey: ['dashboard', 'profile'],
     queryFn: dashboardService.getProfile,
   })
 
+
+  // ==========================================
+  // COURSE APPLICATION / ENROLLMENT DATA
+  // Same source used by Dashboard Overview
+  // ==========================================
+
+  const {
+    data: applications,
+    isLoading: isLoadingApplications,
+  } = useQuery({
+    queryKey: ['course-applications', 'me'],
+    queryFn: courseService.getMyApplications,
+  })
+
+
+  // Get the student's first/current application
+
+  const enrolledApplication = applications?.results?.[0]
+
+
+  // This is exactly the same value used in Overview
+
+  const enrolledCourse = enrolledApplication?.courseTitle
+
+
   const [form, setForm] = useState(null)
   const [savedMessage, setSavedMessage] = useState(false)
+
+
+  // ==========================================
+  // SET FORM DATA
+  // ==========================================
 
   useEffect(() => {
     if (profile) {
@@ -140,11 +187,21 @@ export default function DashboardProfilePage() {
     }
   }, [profile])
 
+
+  // ==========================================
+  // UPDATE PROFILE
+  // ==========================================
+
   const mutation = useMutation({
     mutationFn: dashboardService.updateProfile,
 
     onSuccess: (updated) => {
-      queryClient.setQueryData(['dashboard', 'profile'], updated)
+
+      queryClient.setQueryData(
+        ['dashboard', 'profile'],
+        updated
+      )
+
       setSavedMessage(true)
 
       setTimeout(() => {
@@ -153,6 +210,11 @@ export default function DashboardProfilePage() {
     },
   })
 
+
+  // ==========================================
+  // FORM HANDLERS
+  // ==========================================
+
   function handleChange(e) {
     setForm((f) => ({
       ...f,
@@ -160,16 +222,27 @@ export default function DashboardProfilePage() {
     }))
   }
 
+
   function handleSubmit(e) {
     e.preventDefault()
     mutation.mutate(form)
   }
 
+
+  // ==========================================
+  // PRINT
+  // ==========================================
+
   function handlePrint() {
     window.print()
   }
 
-  if (isLoading || !form) {
+
+  // ==========================================
+  // LOADING
+  // ==========================================
+
+  if (isLoadingProfile || !form) {
     return (
       <div className="flex min-h-[40vh] items-center justify-center">
         <Spinner size="lg" />
@@ -177,13 +250,16 @@ export default function DashboardProfilePage() {
     )
   }
 
+
   return (
     <>
-      {/* ================================
+
+      {/* ==================================================
           PROFILE UPDATE SECTION
-      ================================= */}
+      ================================================== */}
 
       <Card className="profile-edit-section max-w-2xl">
+
         <h1 className="font-display text-xl font-bold text-orbit-ink">
           Your profile
         </h1>
@@ -192,11 +268,14 @@ export default function DashboardProfilePage() {
           Keep your contact and parent/guardian details current.
         </p>
 
+
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 gap-4 sm:grid-cols-2"
         >
+
           {FIELDS.map((field) => (
+
             <Input
               key={field.name}
               id={`profile-${field.name}`}
@@ -211,15 +290,21 @@ export default function DashboardProfilePage() {
                   : ''
               }
             />
+
           ))}
 
+
           {mutation.isError && (
+
             <ErrorMessage className="sm:col-span-2">
               Couldn't save your changes. Please try again.
             </ErrorMessage>
+
           )}
 
+
           <div className="flex items-center gap-3 sm:col-span-2">
+
             <Button
               type="submit"
               isLoading={mutation.isPending}
@@ -227,29 +312,41 @@ export default function DashboardProfilePage() {
               Save changes
             </Button>
 
+
             {savedMessage && (
+
               <span className="text-sm font-medium text-orbit-green-600">
                 Saved
               </span>
+
             )}
+
           </div>
+
         </form>
+
       </Card>
 
 
-      {/* ================================
+
+      {/* ==================================================
           STUDENT DETAILS SECTION
-      ================================= */}
+      ================================================== */}
 
       <Card
         id="student-details"
         className="student-details-section mt-8 max-w-4xl"
       >
-        {/* Header */}
+
+
+        {/* ================================================
+            HEADER
+        ================================================= */}
 
         <div className="flex flex-col gap-4 border-b border-orbit-border pb-5 sm:flex-row sm:items-center sm:justify-between">
 
           <div>
+
             <h2 className="font-display text-2xl font-bold text-orbit-ink">
               Student Details
             </h2>
@@ -257,7 +354,9 @@ export default function DashboardProfilePage() {
             <p className="mt-1 text-sm text-orbit-ink-soft">
               Complete student and enrollment information
             </p>
+
           </div>
+
 
           <Button
             type="button"
@@ -270,12 +369,17 @@ export default function DashboardProfilePage() {
         </div>
 
 
-        {/* Student Information */}
+
+        {/* ================================================
+            PERSONAL INFORMATION
+        ================================================= */}
 
         <div className="mt-6">
+
           <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-orbit-green-600">
             Personal Information
           </h3>
+
 
           <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
 
@@ -284,25 +388,30 @@ export default function DashboardProfilePage() {
               value={form.name}
             />
 
+
             <DetailRow
               label="Email"
               value={form.email}
             />
+
 
             <DetailRow
               label="Phone"
               value={form.phone}
             />
 
+
             <DetailRow
               label="Parent / Guardian"
               value={form.parentName}
             />
 
+
             <DetailRow
               label="Parent Phone"
               value={form.parentPhone}
             />
+
 
             <DetailRow
               label="Student ID"
@@ -313,34 +422,53 @@ export default function DashboardProfilePage() {
               }
             />
 
+
             <div className="sm:col-span-2">
+
               <DetailRow
                 label="Address"
                 value={form.address}
               />
+
             </div>
 
           </div>
+
         </div>
 
 
-        {/* Enrollment Information */}
+
+        {/* ================================================
+            ENROLLED COURSE DETAILS
+        ================================================= */}
 
         <div className="mt-8">
+
           <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-orbit-green-600">
             Enrolled Course Details
           </h3>
 
+
           <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+
+
+            {/* IMPORTANT:
+                Uses the same courseTitle as Overview
+            */}
 
             <DetailRow
               label="Enrolled Course"
               value={
-                form.enrolledCourse ||
-                form.courseName ||
-                form.course?.name
+                isLoadingApplications
+                  ? 'Loading...'
+                  : enrolledCourse
               }
             />
+
+
+            {/* These fields are kept from your previous
+                profile structure. They will show if the
+                backend provides them. */}
 
             <DetailRow
               label="Course Category"
@@ -350,6 +478,7 @@ export default function DashboardProfilePage() {
               }
             />
 
+
             <DetailRow
               label="Course Duration"
               value={
@@ -357,6 +486,7 @@ export default function DashboardProfilePage() {
                 form.course?.duration
               }
             />
+
 
             <DetailRow
               label="Enrollment Status"
@@ -367,6 +497,7 @@ export default function DashboardProfilePage() {
               }
             />
 
+
             <DetailRow
               label="Enrollment Date"
               value={
@@ -375,23 +506,31 @@ export default function DashboardProfilePage() {
               }
             />
 
+
             <DetailRow
               label="Batch"
               value={form.batch}
             />
 
           </div>
+
         </div>
 
 
-        {/* Academic Information */}
+
+        {/* ================================================
+            ACADEMIC INFORMATION
+        ================================================= */}
 
         <div className="mt-8">
+
           <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-orbit-green-600">
             Academic Information
           </h3>
 
+
           <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+
 
             <DetailRow
               label="Highest Qualification"
@@ -401,10 +540,12 @@ export default function DashboardProfilePage() {
               }
             />
 
+
             <DetailRow
               label="Institution"
               value={form.institution}
             />
+
 
             <DetailRow
               label="Year of Passing"
@@ -412,17 +553,24 @@ export default function DashboardProfilePage() {
             />
 
           </div>
+
         </div>
 
 
-        {/* Payment Information */}
+
+        {/* ================================================
+            COURSE / PAYMENT INFORMATION
+        ================================================= */}
 
         <div className="mt-8">
+
           <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-orbit-green-600">
             Course / Payment Information
           </h3>
 
+
           <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+
 
             <DetailRow
               label="Course Fee"
@@ -433,6 +581,7 @@ export default function DashboardProfilePage() {
               }
             />
 
+
             <DetailRow
               label="Amount Paid"
               value={
@@ -441,6 +590,7 @@ export default function DashboardProfilePage() {
                   : null
               }
             />
+
 
             <DetailRow
               label="Due Amount"
@@ -451,48 +601,70 @@ export default function DashboardProfilePage() {
               }
             />
 
+
             <DetailRow
               label="Payment Status"
               value={form.paymentStatus}
             />
 
           </div>
+
         </div>
 
 
-        {/* Declaration */}
+
+        {/* ================================================
+            DECLARATION
+        ================================================= */}
 
         <div className="mt-8 border-t border-orbit-border pt-6">
 
           <p className="text-xs leading-5 text-orbit-ink-soft">
-            This document contains the student information available in
-            the ORBIT Education system. Please contact the administration
-            if any information is incorrect or needs to be updated.
+            This document contains the student information available
+            in the ORBIT Education system. Please contact the
+            administration if any information is incorrect or needs
+            to be updated.
           </p>
 
         </div>
 
 
-        {/* Print Footer */}
+
+        {/* ================================================
+            PRINT FOOTER
+        ================================================= */}
 
         <div className="print-only mt-10 border-t border-gray-300 pt-4">
+
           <div className="flex justify-between text-xs text-gray-600">
-            <span>ORBIT EDUCATIONS</span>
-            <span>Student Profile</span>
+
+            <span>
+              ORBIT EDUCATIONS
+            </span>
+
+            <span>
+              Student Profile
+            </span>
+
           </div>
+
         </div>
+
 
       </Card>
 
 
-      {/* ================================
+
+      {/* ==================================================
           PRINT STYLES
-      ================================= */}
+      ================================================== */}
 
       <style>{`
+
         .print-only {
           display: none;
         }
+
 
         @media print {
 
@@ -501,53 +673,72 @@ export default function DashboardProfilePage() {
             margin: 15mm;
           }
 
+
           body {
             background: white !important;
           }
 
-          /* Hide everything except student details */
 
-          .profile-edit-section,
+          /* Hide profile editing form */
+
+          .profile-edit-section {
+            display: none !important;
+          }
+
+
+          /* Hide print button */
+
           .print-button {
             display: none !important;
           }
+
+
+          /* Student details become full page */
 
           .student-details-section {
             display: block !important;
             max-width: none !important;
             width: 100% !important;
+
             margin: 0 !important;
             padding: 0 !important;
+
             box-shadow: none !important;
             border: none !important;
+            border-radius: 0 !important;
           }
+
+
+          /* Make printed text black */
 
           .student-details-section * {
             color: #000 !important;
           }
 
+
+          /* Show print footer */
+
           .print-only {
             display: block !important;
           }
 
-          /* Remove rounded cards while printing */
 
-          .student-details-section {
-            border-radius: 0 !important;
-          }
-
-          /* Prevent unnecessary page breaks */
+          /* Avoid awkward page breaks */
 
           h2,
           h3 {
             break-after: avoid;
           }
 
+
           .student-details-section > div {
             break-inside: avoid;
           }
+
         }
+
       `}</style>
+
     </>
   )
 }
