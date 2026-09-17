@@ -139,7 +139,7 @@ export default function CourseDetailPage() {
       )}
 
       {/* Background Overlay */}
-      <div className="absolute inset-0 -z-10 bg-white/85" />
+      {/* <div className="absolute inset-0 -z-10 bg-white/85" /> */}
 
       <div className="container-orbit">
 
