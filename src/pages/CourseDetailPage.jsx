@@ -131,7 +131,7 @@ export default function CourseDetailPage() {
       {/* Course Background Image */}
       {course.image_url && (
         <div
-          className="absolute inset-0 -z-20 scale-110 bg-cover bg-center bg-no-repeat blur-sm"
+          className="absolute inset-0 -z-20 scale-110 bg-cover bg-center bg-no-repeat blur-none"
           style={{
             backgroundImage: `url("${course.image_url}")`,
           }}
