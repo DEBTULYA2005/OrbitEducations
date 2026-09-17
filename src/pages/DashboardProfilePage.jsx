@@ -130,6 +130,14 @@ function DetailRow({ label, value }) {
   )
 }
 
+function formatDateTime(dateString) {
+  if (!dateString) return 'Not provided'
+
+  return dateString
+    .replace('T', '/')
+    .replace(/\.\d+Z$/, '')
+}
+
 
 export default function DashboardProfilePage() {
 
@@ -462,7 +470,7 @@ export default function DashboardProfilePage() {
               value={
                 isLoadingApplications
                   ? 'Loading...'
-                  : enrolledCourse
+                  : formatDateTime(enrolledApplication?.created_at)
               }
             />
 
