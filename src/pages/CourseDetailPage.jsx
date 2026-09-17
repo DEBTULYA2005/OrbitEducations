@@ -131,7 +131,7 @@ export default function CourseDetailPage() {
       {/* Course Background Image */}
       {course.image_url && (
         <div
-          className="absolute inset-0 -z-20 scale-110 bg-cover bg-center bg-no-repeat blur-md"
+          className="absolute inset-0 -z-20 scale-110 bg-cover bg-center bg-no-repeat blur"
           style={{
             backgroundImage: `url("${course.image_url}")`,
           }}
@@ -139,7 +139,7 @@ export default function CourseDetailPage() {
       )}
 
       {/* Background Overlay */}
-      {/* <div className="absolute inset-0 -z-10 bg-white/85" /> */}
+      <div className="absolute inset-0 -z-10 bg-white/50" />
 
       <div className="container-orbit">
 
