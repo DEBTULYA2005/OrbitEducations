@@ -171,6 +171,7 @@ export default function DashboardProfilePage() {
   // This is exactly the same value used in Overview
 
   const enrolledCourse = enrolledApplication?.courseTitle
+  console.log('Enrollment data:', enrolledApplication)
 
 
   const [form, setForm] = useState(null)
