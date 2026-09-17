@@ -39,15 +39,43 @@ const QUALIFICATION_OPTIONS = [
   'M.Com.',
   'M.Sc.',
   'M.Tech.',
+  'Class I',
+  'Class II',
+  'Class III',
+  'Class IV',
+  'Class V',
+  'Class VI',
+  'Class VII',
+  'Class VIII',
+  'Class IX',
+  
   'Other',
 ]
 
 const INSTITUTION_OPTIONS = [
+  // Schools
+  'Carmel School, Durgapur',
+  'St. Xavier’s School, Durgapur',
+  'St. Peter’s School, Durgapur',
+  'St. Michael’s School, Durgapur',
+  'Durgapur Public School', 
+  'Doon Public School, Durgapur',
+  'Delhi Public School, Durgapur',
+  'Hem Sheela Model School, Durgapur',
+  'DAV Model School, Durgapur',
+  'Guru Teg Bahadur Public School, Durgapur',
+  'M.A.M.C. Township Modern School, Durgapur',
+  'Assembly of God Church School, Durgapur',
+
+  // Colleges & Universities
   'Dr. B. C. Roy Engineering College',
   'Durgapur Government College',
-  'Durgapur Women’s College',
+  'Durgapur Womens College',
+  'Bengal College, Durgapur',
   'Asansol Engineering College',
   'Kazi Nazrul University',
+
+  // Other
   'Other',
 ]
 
