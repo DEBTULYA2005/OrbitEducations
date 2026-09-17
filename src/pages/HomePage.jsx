@@ -29,53 +29,86 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="container-orbit grid grid-cols-1 items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
-        <div className="animate-orbit-fade-up">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-orbit-green-50 px-3 py-1.5 text-xs font-semibold text-orbit-green-700">
-            School to Professional, one clear path
-          </span>
-          <h1 className="font-display text-4xl font-bold leading-[1.1] text-orbit-ink sm:text-5xl">
-            Every stage of your growth,
-            <br />
-            <span className="text-orbit-blue-600">on one orbit.</span>
-          </h1>
-          <p className="mt-5 max-w-md text-base leading-relaxed text-orbit-ink-soft">
-            Orbit Educations takes students from school foundations through UG/PG,
-            certification and professional courses — with real results to show for it.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {isAuthenticated ? (
-              <Button size="lg" onClick={() => (window.location.href = '/dashboard')}>
-                Go to dashboard
-              </Button>
-            ) : (
-              <>
-                <Button size="lg" onClick={() => openAuth('signup')}>
-                  Enroll now
+      <section className="relative overflow-hidden">
+        {/* Blurry background image */}
+        <div
+          className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat scale-105"
+          style={{
+            backgroundImage: "url('/images/hero-bg.jpg')",
+            filter: 'blur(8px)',
+          }}
+        />
+
+        {/* White/light overlay */}
+        <div className="absolute inset-0 -z-10 bg-white/75" />
+
+        {/* Hero content */}
+        <div className="container-orbit grid grid-cols-1 items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
+
+          <div className="animate-orbit-fade-up">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-orbit-green-50 px-3 py-1.5 text-xs font-semibold text-orbit-green-700">
+              School to Professional, one clear path
+            </span>
+
+            <h1 className="font-display text-4xl font-bold leading-[1.1] text-orbit-ink sm:text-5xl">
+              Every stage of your growth,
+              <br />
+              <span className="text-orbit-blue-600">on one orbit.</span>
+            </h1>
+
+            <p className="mt-5 max-w-md text-base leading-relaxed text-orbit-ink-soft">
+              Orbit Educations takes students from school foundations through UG/PG,
+              certification and professional courses — with real results to show for it.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              {isAuthenticated ? (
+                <Button
+                  size="lg"
+                  onClick={() => (window.location.href = '/dashboard')}
+                >
+                  Go to dashboard
                 </Button>
-                <Button size="lg" variant="outline" onClick={() => openAuth('login')}>
-                  Log in
-                </Button>
-              </>
-            )}
+              ) : (
+                <>
+                  <Button size="lg" onClick={() => openAuth('signup')}>
+                    Enroll now
+                  </Button>
+
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    onClick={() => openAuth('login')}
+                  >
+                    Log in
+                  </Button>
+                </>
+              )}
+            </div>
+
+            <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-orbit-line pt-8">
+              {[
+                ['10,000+', 'Students trained'],
+                ['2', 'Learning centers'],
+                ['92%', 'Certification pass rate'],
+              ].map(([stat, label]) => (
+                <div key={label}>
+                  <dt className="font-mono-stat text-2xl font-bold text-orbit-blue-600">
+                    {stat}
+                  </dt>
+
+                  <dd className="mt-1 text-xs text-orbit-mist">
+                    {label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
-          <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-orbit-line pt-8">
-            {[
-              ['10,000+', 'Students trained'],
-              ['2', 'Learning centers'],
-              ['92%', 'Certification pass rate'],
-            ].map(([stat, label]) => (
-              <div key={label}>
-                <dt className="font-mono-stat text-2xl font-bold text-orbit-blue-600">{stat}</dt>
-                <dd className="mt-1 text-xs text-orbit-mist">{label}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+          <div className="flex justify-center">
+            <OrbitRings labels={['Schools', 'UG / PG', 'Professional']} />
+          </div>
 
-        <div className="flex justify-center">
-          <OrbitRings labels={['Schools', 'UG / PG', 'Professional']} />
         </div>
       </section>
 
