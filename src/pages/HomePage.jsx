@@ -34,7 +34,7 @@ export default function HomePage() {
         <div
           className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat scale-105"
           style={{
-            backgroundImage: "url('/images/hero-bg.jpg')",
+            backgroundImage: "url('orbit-educations-frontend/src/assets/images/hero-bg.jpg')",
             filter: 'blur(8px)',
           }}
         />
