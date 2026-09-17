@@ -47,9 +47,9 @@ export default function Footer() {
           <h3 className="mb-3 text-sm font-semibold text-white">Head Office</h3>
           <address className="text-sm not-italic leading-relaxed text-slate-400">
             Orbit Educations Campus,<br />
-            Rabindra Pally, Durgapur, West Bengal, India<br />
-            <a href="tel:+910000000000" className="hover:text-orbit-green-400">+91 00000 00000</a><br />
-            <a href="mailto:hello@orbiteducations.in" className="hover:text-orbit-green-400">hello@orbiteducations.in</a>
+            Rabindra Pally, Durgapur, West Bengal, INDIA<br />
+            <a href="tel:+918250597695" className="hover:text-orbit-green-400">+91 82505 97695</a><br />
+            <a href="mailto:orbit.durgapur@gmail.com" className="hover:text-orbit-green-400">orbit.durgapur@gmail.com</a>
           </address>
         </div>
       </div>
