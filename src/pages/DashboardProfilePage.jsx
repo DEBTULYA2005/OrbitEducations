@@ -485,7 +485,8 @@ export default function DashboardProfilePage() {
               label="Course Duration"
               value={
                 form.courseDuration ||
-                form.course?.duration
+                form.course?.duration ||
+                'Undefined'
               }
             />
 
@@ -503,8 +504,9 @@ export default function DashboardProfilePage() {
             <DetailRow
               label="Enrollment Date"
               value={
-                form.enrollmentDate ||
-                form.enrolledAt
+                isLoadingApplications
+                ? 'Loading...'
+                : enrolledApplication?.created_at
               }
             />
 
