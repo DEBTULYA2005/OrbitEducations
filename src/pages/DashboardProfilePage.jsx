@@ -470,7 +470,7 @@ export default function DashboardProfilePage() {
               value={
                 isLoadingApplications
                   ? 'Loading...'
-                  : formatDateTime(enrolledApplication?.created_at)
+                  : enrolledCourse
               }
             />
 
@@ -502,9 +502,9 @@ export default function DashboardProfilePage() {
             <DetailRow
               label="Enrollment Status"
               value={
-                form.enrollmentStatus ||
-                form.status ||
-                'Active'
+                isLoadingApplications
+                  ? 'Loading...'
+                  : formatDateTime(enrolledApplication?.created_at)
               }
             />
 
