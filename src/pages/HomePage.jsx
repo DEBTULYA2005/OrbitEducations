@@ -8,6 +8,7 @@ import EnrollmentForm from '@/components/forms/EnrollmentForm'
 import OrbitRings from '@/components/common/OrbitRings'
 import Button from '@/components/common/Button'
 import Card from '@/components/common/Card'
+import heroBg from '@/assets/images/hero-bg.jpg'
 
 export default function HomePage() {
   const { isAuthenticated } = useAuth()
@@ -34,7 +35,7 @@ export default function HomePage() {
         <div
           className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat scale-105"
           style={{
-            backgroundImage: "url('orbit-educations-frontend/src/assets/images/hero-bg.jpg')",
+            backgroundImage: `url('${heroBg}')`,
             filter: 'blur(8px)',
           }}
         />
