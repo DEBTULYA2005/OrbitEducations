@@ -1,3 +1,4 @@
+import heroBg from '@/assets/images/hero-bg.jpg'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
@@ -8,7 +9,7 @@ import EnrollmentForm from '@/components/forms/EnrollmentForm'
 import OrbitRings from '@/components/common/OrbitRings'
 import Button from '@/components/common/Button'
 import Card from '@/components/common/Card'
-import heroBg from '@/assets/images/hero-bg.jpg'
+
 
 export default function HomePage() {
   const { isAuthenticated } = useAuth()
@@ -30,23 +31,26 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        {/* Blurry background image */}
-        <div
-          className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat scale-105"
+      <section className="relative isolate overflow-hidden">
+
+        {/* Background Image */}
+        <img
+          src={heroBg}
+          alt=""
+          className="absolute inset-0 z-0 h-full w-full scale-110 object-cover"
           style={{
-            backgroundImage: `url('${heroBg}')`,
-            filter: 'blur(8px)',
+            filter: 'blur(10px)',
           }}
         />
 
-        {/* White/light overlay */}
-        <div className="absolute inset-0 -z-10 bg-white/75" />
+        {/* White overlay */}
+        <div className="absolute inset-0 z-10 bg-white/55" />
 
-        {/* Hero content */}
-        <div className="container-orbit grid grid-cols-1 items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
+        {/* Hero Content */}
+        <div className="container-orbit relative z-20 grid grid-cols-1 items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
 
           <div className="animate-orbit-fade-up">
+
             <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-orbit-green-50 px-3 py-1.5 text-xs font-semibold text-orbit-green-700">
               School to Professional, one clear path
             </span>
@@ -104,6 +108,7 @@ export default function HomePage() {
                 </div>
               ))}
             </dl>
+
           </div>
 
           <div className="flex justify-center">
