@@ -546,22 +546,19 @@ export default function DashboardProfilePage() {
 
             <DetailRow
               label="Highest Qualification"
-              value={
-                form.qualification ||
-                form.education
-              }
+              value={form.highestQualification || 'Not provided'}
             />
 
 
             <DetailRow
               label="Institution"
-              value={form.institution}
+              value={form.institution || 'Not provided'}
             />
 
 
             <DetailRow
               label="Year of Passing"
-              value={form.passingYear}
+              value={form.yearOfPassing || 'Not provided'}
             />
 
           </div>
