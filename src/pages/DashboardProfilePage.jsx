@@ -171,7 +171,7 @@ export default function DashboardProfilePage() {
   // This is exactly the same value used in Overview
 
   const enrolledCourse = enrolledApplication?.courseTitle
-  console.log('Enrollment data:', enrolledApplication)
+  // console.log('Enrollment data:', enrolledApplication)
 
 
   const [form, setForm] = useState(null)
@@ -474,8 +474,9 @@ export default function DashboardProfilePage() {
             <DetailRow
               label="Course Category"
               value={
-                form.courseCategory ||
-                form.course?.category
+                isLoadingApplications
+                ? 'Loading...'
+                : enrolledApplication?.courseCategory
               }
             />
 
