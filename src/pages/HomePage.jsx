@@ -39,7 +39,7 @@ export default function HomePage() {
           alt=""
           className="absolute inset-0 z-0 h-full w-full scale-110 object-cover"
           style={{
-            filter: 'blur(10px)',
+            filter: 'blur(5px)',
           }}
         />
 
