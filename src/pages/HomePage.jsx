@@ -10,6 +10,45 @@ import OrbitRings from '@/components/common/OrbitRings'
 import Button from '@/components/common/Button'
 import Card from '@/components/common/Card'
 
+import a from '@/assets/images/1.jpeg'
+import b from '@/assets/images/2.jpeg'
+import c from '@/assets/images/3.jpeg'
+import d from '@/assets/images/4.jpeg'
+import e from '@/assets/images/5.jpeg'
+import f from '@/assets/images/6.jpeg'
+
+const TOPPERS_2026 = [
+    {
+      name: "Anwesha Roy",
+      achievement: "State Rank 4 — Class 12 Boards",
+      image: a,
+    },
+    {
+      name: "Rohan Ghosh",
+      achievement: "District Topper — Class 10 Boards",
+      image: b,
+    },
+    {
+      name: "Sneha Banerjee",
+      achievement: "Gold Medalist — B.Sc. Physics",
+      image: c,
+    },
+    {
+      name: "Arjun Sharma",
+      achievement: "National Level Participant — Olympiad",
+      image: d,
+    },
+    {
+      name: "Priya Desai",
+      achievement: "State Rank 2 — Class 12 Boards",
+      image: e,
+    },
+    {
+      name: "Karan Mehta",
+      achievement: "Dean's List — B.Tech Computer Science",
+      image: f,
+    },
+  ]
 
 export default function HomePage() {
   const { isAuthenticated } = useAuth()
@@ -135,7 +174,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Enrollment form */}
+      {/* Enrollment form
       <section className="py-20">
         <div className="container-orbit grid grid-cols-1 gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
@@ -148,6 +187,43 @@ export default function HomePage() {
           <Card className="lg:col-span-3">
             <EnrollmentForm />
           </Card>
+        </div>
+      </section> */}
+
+      {/* 2026 toppers */}
+      <section className="py-20">
+        <div className="container-orbit">
+          <div className="mx-auto max-w-xl text-center">
+            <h2 className="font-display text-3xl font-bold text-orbit-ink">Our 2026 toppers</h2>
+            <p className="mt-3 text-orbit-ink-soft">
+              A few of the students who topped their boards, exams, and Olympiads this year.
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
+            {TOPPERS_2026.map((topper) => (
+              <Card key={topper.name} hoverable className="overflow-hidden p-0">
+                <div className="aspect-[4/5] overflow-hidden">
+                  <img
+                    src={topper.image}
+                    alt={topper.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="p-5 text-center">
+                  <h3 className="font-display text-lg font-semibold text-orbit-ink">{topper.name}</h3>
+                  <p className="mt-1 text-sm text-orbit-ink-soft">{topper.achievement}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link to="/awards" className="text-sm font-semibold text-orbit-blue-600 hover:underline">
+              See all awards & rankers →
+            </Link>
+          </div>
         </div>
       </section>
 
