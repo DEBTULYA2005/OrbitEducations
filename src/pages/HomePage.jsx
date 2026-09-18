@@ -16,6 +16,12 @@ import c from '@/assets/images/3.jpeg'
 import d from '@/assets/images/4.jpeg'
 import e from '@/assets/images/5.jpeg'
 import f from '@/assets/images/6.jpeg'
+import g from '@/assets/images/7.jpeg'
+import h from '@/assets/images/8.jpeg'
+import i from '@/assets/images/9.jpeg'
+import j from '@/assets/images/10.jpeg'
+import k from '@/assets/images/11.jpeg'
+import l from '@/assets/images/12.jpeg'
 
 const TOPPERS_2026 = [
     {
@@ -47,6 +53,36 @@ const TOPPERS_2026 = [
       name: "Karan Mehta",
       achievement: "Dean's List — B.Tech Computer Science",
       image: f,
+    },
+    {
+      name: "Neha Patel",
+      achievement: "State Rank 1 — Class 12 Boards",
+      image: g,
+    },
+    {
+      name: "Vikram Singh",
+      achievement: "Gold Medalist — M.Sc. Mathematics",
+      image: h,
+    },
+    {
+      name: "Anjali Gupta",
+      achievement: "District Topper — Class 10 Boards",
+      image: i,
+    },
+    {
+      name: "Rajesh Kumar",
+      achievement: "National Level Participant — Olympiad",
+      image: j,
+    },
+    {
+      name: "Sunita Verma",
+      achievement: "State Rank 3 — Class 12 Boards",
+      image: k,
+    },
+    {
+      name: "Amitabh Bachchan",
+      achievement: "Dean's List — B.Tech Electrical Engineering",
+      image: l,
     },
   ]
 
