@@ -200,7 +200,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-5 md:grid-cols-4">
+          <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-5 md:grid-cols-7">
             {TOPPERS_2026.map((topper) => (
               <Card
                 key={topper.name}
