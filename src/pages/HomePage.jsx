@@ -205,7 +205,7 @@ export default function HomePage() {
               <Card
                 key={topper.name}
                 hoverable
-                className="mx-auto w-full max-w-[140px] overflow-hidden p-2"
+                className="mx-auto w-full max-w-[170px] overflow-hidden p-2"
               >
                 <div className="aspect-square overflow-hidden rounded-lg bg-orbit-blue-50/40">
                   <img
