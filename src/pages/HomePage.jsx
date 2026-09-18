@@ -211,10 +211,10 @@ export default function HomePage() {
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <div className="p-5 text-center">
+                {/* <div className="p-5 text-center">
                   <h3 className="font-display text-lg font-semibold text-orbit-ink">{topper.name}</h3>
                   <p className="mt-1 text-sm text-orbit-ink-soft">{topper.achievement}</p>
-                </div>
+                </div> */}
               </Card>
             ))}
           </div>
