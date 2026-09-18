@@ -200,21 +200,21 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-5 md:grid-cols-6">
             {TOPPERS_2026.map((topper) => (
-              <Card key={topper.name} hoverable className="overflow-hidden p-0">
-                <div className="aspect-[4/5] overflow-hidden">
+              <Card
+                key={topper.name}
+                hoverable
+                className="mx-auto w-full max-w-[140px] overflow-hidden p-2"
+              >
+                <div className="aspect-square overflow-hidden rounded-lg bg-orbit-blue-50/40">
                   <img
                     src={topper.image}
                     alt={topper.name}
                     loading="lazy"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain"
                   />
                 </div>
-                {/* <div className="p-5 text-center">
-                  <h3 className="font-display text-lg font-semibold text-orbit-ink">{topper.name}</h3>
-                  <p className="mt-1 text-sm text-orbit-ink-soft">{topper.achievement}</p>
-                </div> */}
               </Card>
             ))}
           </div>
