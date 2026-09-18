@@ -302,6 +302,7 @@ export default function SignupForm({ onSuccess }) {
       {signupError && (
         <ErrorMessage>
           {signupError.response?.data?.detail ||
+            Object.values(signupError.response?.data || {}).flat()[0] ||
             'Unable to create your account. Please check your details.'}
         </ErrorMessage>
       )}
