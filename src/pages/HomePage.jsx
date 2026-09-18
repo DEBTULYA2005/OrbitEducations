@@ -200,12 +200,12 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-5 md:grid-cols-7">
+          <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-5 md:grid-cols-6">
             {TOPPERS_2026.map((topper) => (
               <Card
                 key={topper.name}
                 hoverable
-                className="mx-auto w-full max-w-[210px] overflow-hidden p-2"
+                className="mx-auto w-full max-w-[250px] overflow-hidden p-2"
               >
                 <div className="aspect-square overflow-hidden rounded-lg bg-orbit-blue-50/40">
                   <img
