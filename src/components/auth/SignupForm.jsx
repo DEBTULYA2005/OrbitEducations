@@ -88,6 +88,7 @@ export default function SignupForm({ onSuccess }) {
   const { signup, isSigningUp, signupError } = useAuth()
   const navigate = useNavigate()
   const [form, setForm] = useState(INITIAL_FORM)
+  const [showPassword, setShowPassword] = useState(false)
 
   function generateUID() {
     return `ORB${Date.now().toString().slice(-8)}${Math.floor(Math.random() * 100)}`
@@ -161,16 +162,26 @@ export default function SignupForm({ onSuccess }) {
           required
         />
 
-        <Input
-          id="su-password"
-          name="password"
-          type="password"
-          label="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-          className="sm:col-span-2"
-        />
+        <div className="relative sm:col-span-2">
+          <Input 
+            id="su-password" 
+            name="password" 
+            type={showPassword ? 'text' : 'password'} 
+            label="Password" 
+            value={form.password} 
+            onChange={handleChange} 
+            required 
+            className="w-full pr-16" 
+          />
+
+          <button
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute right-3 top-[38px] text-sm text-gray-500 hover:text-gray-700"
+          >
+            {showPassword ? 'Hide' : 'Show'}
+          </button>
+        </div>
       </div>
 
       {/* Academic Information */}

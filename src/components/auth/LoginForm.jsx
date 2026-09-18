@@ -68,7 +68,9 @@ export default function LoginForm({ onSuccess }) {
 
       {loginError && (
         <ErrorMessage>
-          {loginError.response?.data?.detail || 'Unable to log in. Check your details and try again.'}
+          {loginError.response?.data?.detail ||
+            Object.values(loginError.response?.data || {}).flat()[0] ||
+            'Unable to log in. Check your details and try again.'}
         </ErrorMessage>
       )}
 
