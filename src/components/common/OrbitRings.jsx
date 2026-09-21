@@ -13,7 +13,7 @@ import hardwareIcon from "../../assets/icons/hardware.svg";
 import programmingIcon from "../../assets/icons/programming.svg";
 
 export default function OrbitRings({
-  labels = ["School", "UG / PG", "Professional"],
+  labels = ["School", "UG / PG", "Professional", "Specialization"],
   className = "",
 }) {
   // Change this array to control the number and spacing of rings.
