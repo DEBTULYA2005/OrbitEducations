@@ -9,10 +9,23 @@ import Select from '@/components/common/Select'
 import Button from '@/components/common/Button'
 import ErrorMessage from '@/components/common/ErrorMessage'
 
+function extractErrorMessage(error, fallback) {
+  const data = error?.response?.data
+  if (!data) return fallback
+
+  if (typeof data.detail === 'string') return data.detail
+
+  const firstField = Object.keys(data)[0]
+  if (firstField && Array.isArray(data[firstField])) {
+    return data[firstField][0]
+  }
+
+  return fallback
+}
+
 export default function EnrollmentForm({ course }) {
   const { user, isAuthenticated } = useAuth()
 
-  // Anonymous visitor: no form at all — just a prompt to log in.
   if (!isAuthenticated) {
     return (
       <div className="rounded-2xl border border-orbit-line bg-orbit-blue-50/40 p-6 text-center">
@@ -27,7 +40,6 @@ export default function EnrollmentForm({ course }) {
     )
   }
 
-  // Logged in: only their enrolled category is selectable.
   const allowedCategory = COURSE_CATEGORIES.find((c) => c.id === user.enrolledCourseCategory)
 
   const initialForm = { courseId: course?.id || '', message: '' }
@@ -99,7 +111,11 @@ export default function EnrollmentForm({ course }) {
         />
       </div>
 
-      {mutation.isError && <ErrorMessage>Something went wrong submitting your application. Please try again.</ErrorMessage>}
+      {mutation.isError && (
+        <ErrorMessage>
+          {extractErrorMessage(mutation.error, 'Something went wrong submitting your application. Please try again.')}
+        </ErrorMessage>
+      )}
 
       <Button type="submit" isLoading={mutation.isPending} disabled={!allowedCategory}>
         Submit application
