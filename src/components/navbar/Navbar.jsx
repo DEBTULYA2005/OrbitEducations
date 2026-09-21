@@ -31,7 +31,7 @@ export default function Navbar() {
 
           <div className="flex flex-col leading-tight">
             <span className="text-[#003366] text-lg font-bold">
-              Orbit Educations
+              <span className="text-[#ff4d4d]">Orbit</span> Educations
             </span>
 
             <span className="text-[#14213D] text-[10px] font-medium">
