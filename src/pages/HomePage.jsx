@@ -1,4 +1,5 @@
 import heroBg from '@/assets/images/hero-bg.jpg'
+import boardToppersBanner from '@/assets/images/board-toppers-banner.png'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
@@ -210,30 +211,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Enrollment form
-      <section className="py-20">
-        <div className="container-orbit grid grid-cols-1 gap-12 lg:grid-cols-5">
-          <div className="lg:col-span-2">
-            <h2 className="font-display text-3xl font-bold text-orbit-ink">Apply for a course</h2>
-            <p className="mt-3 text-orbit-ink-soft">
-              Tell us what you're aiming for. Our admissions team will guide you to the right
-              track — no account needed to apply.
-            </p>
-          </div>
-          <Card className="lg:col-span-3">
-            <EnrollmentForm />
-          </Card>
-        </div>
-      </section> */}
-
       {/* 2026 toppers */}
       <section className="py-20">
         <div className="container-orbit">
-          <div className="mx-auto max-w-xl text-center">
-            <h2 className="font-display text-3xl font-bold text-orbit-ink">Our 2026 toppers</h2>
-            <p className="mt-3 text-orbit-ink-soft">
-              A few of the students who topped their boards, exams, and Olympiads this year.
-            </p>
+          <div className="mx-auto max-w-2xl text-center">
+            <img
+              src={boardToppersBanner}
+              alt="Orbit Board Toppers 2026 — Congratulations to our achievers"
+              className="mx-auto w-full max-w-lg"
+            />
           </div>
 
           <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-5 md:grid-cols-6">
