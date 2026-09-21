@@ -19,13 +19,25 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-30 border-b border-orbit-line bg-white/90 backdrop-blur-md">
       <div className="container-orbit flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold text-orbit-ink">
+        <Link
+          to="/"
+          className="flex items-center gap-3 font-display text-lg font-bold"
+        >
           <img
-              src={logo}
-              alt="Orbit Educations Logo"
-              className="h-12 w-12 rounded-full object-cover"
-            />
-          Orbit Educations
+            src={logo}
+            alt="Orbit Educations Logo"
+            className="h-12 w-12 rounded-full object-cover"
+          />
+
+          <div className="flex flex-col leading-tight">
+            <span className="text-[#14213D] text-lg font-bold">
+              Orbit Educations
+            </span>
+
+            <span className="text-[#14213D] text-[10px] font-medium">
+              The Premium Computer Classes
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
