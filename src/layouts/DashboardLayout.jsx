@@ -17,9 +17,9 @@ export default function DashboardLayout() {
       <aside className="hidden w-64 shrink-0 border-r border-orbit-line bg-white p-5 md:block">
         <div className="mb-8 flex items-center gap-2 font-display text-lg font-bold text-orbit-ink">
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orbit-blue-600 text-sm text-white">
-            O
+            {user?.name ? user.name.charAt(0).toUpperCase() : 'O'}
           </span>
-          Orbit
+            {user?.name || 'Orbit'}
         </div>
         <nav className="flex flex-col gap-1">
           {DASHBOARD_LINKS.map((link) => (
